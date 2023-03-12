@@ -3,7 +3,10 @@ import { FC } from "react"
 import Head from "next/head"
 import { NavBar } from "../ui/NavBar";
 
-export const Layout: FC<{ title?: string }> = ({ children, title }) => {
+export const Layout: FC<{ 
+  title?: string,
+  children: React.ReactNode;
+}> = ({ children, title }) => {
   return (
     <>
       <Head>

@@ -11,6 +11,5 @@ export default async function handler(
   res: NextApiResponse<Data>
 ) {
   await db.connect()
-  await db.disconnect()
   res.status(200).json({ name: 'John Doe' })
 }
