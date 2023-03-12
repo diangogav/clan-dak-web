@@ -1,0 +1,10 @@
+services:
+  mongodb:
+    image: mongo
+    container_name: mongo-dak
+    logging: 
+      driver: none
+    ports:
+      - 27017:27017
+    volumes:
+      - .data/mongo:/data/db

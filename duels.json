@@ -1,0 +1,18 @@
+[
+  {
+    "playerId": "640df480d252e40c012819e5",
+    "matchType": 5,
+    "wins": 3,
+    "defeats": 1,
+    "playerWon": true,
+    "opponent": "Jaiboso"
+  },
+  {
+    "playerId": "640df480d252e40c012819e5",
+    "matchType": 5,
+    "wins": 2,
+    "defeats": 3,
+    "playerWon": false,
+    "opponent": "Nigromante"
+  }
+]
