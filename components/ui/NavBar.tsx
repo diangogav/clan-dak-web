@@ -1,9 +1,8 @@
-import { useTheme, Text, Spacer } from "@nextui-org/react"
-import Image from "next/image"
+import { useTheme, Text, Spacer } from "@nextui-org/react";
+import Image from "next/image";
 
 export const NavBar = () => {
-
-  const { theme } = useTheme()
+  const { theme } = useTheme();
 
   return (
     <div
@@ -14,10 +13,10 @@ export const NavBar = () => {
         alignItems: "center",
         justifyContent: "start",
         padding: "0px 20px",
-        backgroundColor: theme?.colors?.gray100.value
+        backgroundColor: theme?.colors?.gray100.value,
       }}
     >
-      <Image 
+      <Image
         src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png"
         alt="icono de la app"
         width={70}
@@ -29,6 +28,10 @@ export const NavBar = () => {
       </Text>
 
       <Spacer css={{ flex: 1 }} />
+
+      <Text color="white" h3>
+        Duelistas DAK
+      </Text>
     </div>
   );
-}
+};
