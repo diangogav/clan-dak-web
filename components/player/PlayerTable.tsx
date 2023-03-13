@@ -1,5 +1,5 @@
 import { Player } from "@/interfaces";
-import { Col, Row, Table, Tooltip, User } from "@nextui-org/react";
+import { Col, Row, Table, Tooltip, User } from '@nextui-org/react';
 import { useEffect, useState } from "react";
 import { playersAPI } from '../../apis';
 import { EyeIcon } from "./EyeIcon";
@@ -50,7 +50,9 @@ export const PlayerTable = () => {
               <Col css={{ d: "flex" }}>
                 <Tooltip content="Details">
                   <IconButton
-                    onClick={() => console.log("View user", user?.id)}
+                    onClick={() => {
+                      console.log(user._id)
+                    }}
                   >
                     <EyeIcon size={20} fill="#979797" />
                   </IconButton>

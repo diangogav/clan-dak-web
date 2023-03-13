@@ -3,6 +3,7 @@ import Image from "next/image"
 
 export const NavBar = () => {
 
+  const { theme } = useTheme()
 
   return (
     <div
@@ -13,6 +14,7 @@ export const NavBar = () => {
         alignItems: "center",
         justifyContent: "start",
         padding: "0px 20px",
+        backgroundColor: theme?.colors?.gray100.value
       }}
     >
       <Image 
@@ -21,7 +23,7 @@ export const NavBar = () => {
         width={70}
         height={70}
       />
-      <Text color="black" h3>
+      <Text color="white" h3>
         {" "}
         Clan DAK{" "}
       </Text>
