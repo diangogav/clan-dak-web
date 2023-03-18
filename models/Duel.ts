@@ -1,9 +1,12 @@
 import mongoose, { Model, Schema } from "mongoose";
 
 const duelSchema = new Schema({
-  playerId: {
+  eventId: {
     type: String,
     required: true
+  },
+  playerId: {
+    type: String,
   },
   matchType: {
     type: Number,
@@ -23,6 +26,22 @@ const duelSchema = new Schema({
   },
   opponent: {
     type: String,
+    required: true
+  },
+  playerClan: {
+    type: String,
+    required: true
+  },
+  opponentClan: {
+    type: String,
+    required: true
+  },
+  playerPoints: {
+    type: Number,
+    required: true
+  },
+  opponentPoints: {
+    type: Number,
     required: true
   },
 })

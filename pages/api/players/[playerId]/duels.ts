@@ -17,12 +17,12 @@ export default async function handler(
     }
 
     case 'POST': {
-      const playerId = req?.query?.playerId as string
+      // const playerId = req?.query?.playerId as string
       await db.connect()
-      const duel = new DuelModel({ ...req?.body, playerId })
+      const duel = new DuelModel({ ...req?.body })
       await duel.save()
-      const stats = await calculatePlayerStats(playerId)
-      await PlayerModel.updateOne({ _id: playerId }, { $set: stats })
+      // const stats = await calculatePlayerStats(playerId)
+      // await PlayerModel.updateOne({ _id: playerId }, { $set: stats })
       res.status(200).json(duel)
       break
     }

@@ -6,7 +6,7 @@ import { Layout } from '../components/layouts/Layout';
 const HomePage: NextPage = () => {
   return (
     <Layout title = "Clan DAK">
-      <PlayerTable />
+      {/* <PlayerTable /> */}
     </Layout>
   )
 }

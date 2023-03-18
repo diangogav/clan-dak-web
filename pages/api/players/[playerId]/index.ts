@@ -29,7 +29,8 @@ export async function calculatePlayerStats(playerId: string) {
         defeats: { $sum: "$defeats" },
         matchWins: { $sum: { $cond: [ { $eq: [ "$playerWon", true ] }, 1, 0] }},
         matchLosses: { $sum: { $cond: [ { $eq: [ "$playerWon", false ] }, 1, 0] }},
-        matchesPlayed: { $sum: 1 }
+        matchesPlayed: { $sum: 1 },
+        points: { $sum: "$playerPoints" }
       }
     }
   ]).exec()

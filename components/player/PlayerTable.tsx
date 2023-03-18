@@ -1,46 +1,35 @@
-import { Player } from "@/interfaces";
 import { Col, Row, Table, Tooltip, User } from '@nextui-org/react';
-import { useEffect, useState } from "react";
-import { playersAPI } from '../../apis';
+import { FC } from "react";
 import { EyeIcon } from "./EyeIcon";
 import { IconButton } from "./IconButton";
+import { DuelStatistic } from '../../interfaces';
+import { useRouter } from 'next/router';
 
+interface Props {
+  statistics: DuelStatistic[]
+}
 
-export const PlayerTable = () => {
-  const [players, setPlayers] = useState<Player[]>([])
+export const PlayerTable: FC<Props> = ({ statistics }) => {
 
-  const getPlayers = async () => {
-    const { data } = await playersAPI.get<Player[]>('/players')
-    setPlayers(data.map( player => {
-      return {
-        ...player,
-        winRate: (player.matchWins / player.matchesPlayed) || 1
-      }
-    }))
-  } 
-
-  useEffect(() => {
-    getPlayers()
-  }, [])
+  const router = useRouter()
 
   const columns = [
     { name: "Nickname", uid: "name" },
     { name: "Match Jugados", uid: "matchesPlayed" },
     { name: "Match Ganados", uid: "matchWins" },
     { name: "Match Perdidos", uid: "matchLosses" },
-    { name: "Victorias", uid: "wins" },
-    { name: "Derrotas", uid: "defeats" },
-    { name: "Win Rate", uid: "winRate" },
+    { name: "Duelos Ganados", uid: "wins" },
+    { name: "Duelos Perdidos", uid: "defeats" },
     { name: "Acciones", uid: "actions" }
   ];
 
-  const renderCell = (user: Player, columnKey: React.Key) => {
-    const cellValue = user[columnKey as keyof Player];
+  const renderCell = (user: DuelStatistic, columnKey: React.Key) => {
+    const cellValue = user[columnKey as keyof DuelStatistic];
     switch (columnKey) {
       case "name":
         return (
-          <User squared src={user?.avatar} name={cellValue} css={{ p: 0 }}>
-            {user?.nickname}
+          <User squared src="https://i.pinimg.com/originals/0e/72/b3/0e72b35e99486084d2170a8d7cc38394.png" name={cellValue} css={{ p: 0 }}>
+            {user?.playerName}
           </User>
         );
 
@@ -51,7 +40,7 @@ export const PlayerTable = () => {
                 <Tooltip content="Details">
                   <IconButton
                     onClick={() => {
-                      console.log(user._id)
+                      router.push("/events/[eventId]/player/[playerId]", `/events/${user.eventId}/player/${user.playerId}`)  
                     }}
                   >
                     <EyeIcon size={20} fill="#979797" />
@@ -83,8 +72,8 @@ export const PlayerTable = () => {
           </Table.Column>
         )}
       </Table.Header>
-      <Table.Body items={players}>
-        {(item: Player) => (
+      <Table.Body items={statistics}>
+        {(item: DuelStatistic) => (
           <Table.Row>
             {(columnKey) => (
               <Table.Cell>{renderCell(item, columnKey)}</Table.Cell>
