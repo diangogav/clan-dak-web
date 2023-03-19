@@ -44,7 +44,7 @@ export const ClanTable: FC<Props> = ({ clanStats }) => {
         )}
       </Table.Header>
       <Table.Body items={clanStats}>
-        {(item: DuelStatistic) => (
+        {(item: { clan: string; matchCount: number; average: string }) => (
           <Table.Row>
             {(columnKey) => (
               <Table.Cell>{renderCell(item, columnKey)}</Table.Cell>
