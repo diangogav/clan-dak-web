@@ -9,6 +9,7 @@ import { db } from '@/database';
 import { ClanTable } from '@/components/clan/ClanTable';
 import { PieChart } from '@/components/ui/PieChart';
 import { Grid } from '@nextui-org/react';
+import axios from 'axios';
 
 interface Props {
   statistics: DuelStatistic[];
@@ -50,56 +51,9 @@ export const getServerSideProps: GetServerSideProps = async({ params }) => {
   db.connect()
   const response = await DuelStatisticsModel.find({ eventId })
   const statistics = response.map(item => ({ ...item.toObject(), _id: item._id.toString() }))
-  const playerClanStats = await DuelModel.aggregate([
-    {
-      $match: { eventId }
-    },
-    {
-      $group: {
-        _id: '$playerClan',
-        points: { $sum: '$playerPoints' },
-        matchCount: { $sum: 1}
-      }
-    }
-  ]).exec()
 
-  const opponentClanStats = await DuelModel.aggregate([
-    {
-      $match: { eventId }
-    },
-    {
-      $group: {
-        _id: '$opponentClan',
-        points: { $sum: '$opponentPoints' },
-        matchCount: { $sum: 1}
-      }
-    }
-  ]).exec()
-
-  const playerClanNames = playerClanStats.map(clan => clan._id)
-  const opponentClanNames = opponentClanStats.map(clan => clan._id)
-  const clanNames = Array.from(new Set([...playerClanNames, ...opponentClanNames]))
-
-  const clanStats = clanNames.map((name, index) => {
-    const playerClanStat = playerClanStats.find(playerClan => playerClan._id === name)
-    const opponentClanStat = opponentClanStats.find(opponentClan => opponentClan._id === name)
-    const points = (playerClanStat?.points || 0) + (opponentClanStat?.points || 0)
-    const matchCount = (playerClanStat?.matchCount || 0) + (opponentClanStat?.matchCount || 0)
-    const average = (points / matchCount).toFixed(2)
-    const missingDuels = 36 - matchCount
-    const maxPointsAvailable =  (missingDuels * 6) + points
-
-    return {
-      clan: name,
-      points,
-      matchCount,
-      average,
-      id: index,
-      missingDuels,
-      maxPointsAvailable
-    }
-  })
-
+  const clanStatsresponse = await axios.get(`https://dak-backend-production.up.railway.app/v1/duels/event/${eventId}/clan/stats`)
+  const clanStats = clanStatsresponse?.data
   const vsStats = await DuelModel.aggregate(  [
     {
       $match: { playerClan: 'DAK' }
@@ -118,7 +72,7 @@ export const getServerSideProps: GetServerSideProps = async({ params }) => {
   return {
     props: {
       statistics,
-      clanStats: clanStats.sort((b: any , a: any) => a.points - b.points ),
+      clanStats: clanStats.map((item: any, index: number) => ({...item, id: index})).sort((b: any , a: any) => a.points - b.points ),
       vsStats
     },
   };
