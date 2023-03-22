@@ -54,20 +54,9 @@ export const getServerSideProps: GetServerSideProps = async({ params }) => {
 
   const clanStatsresponse = await axios.get(`https://dak-backend-production.up.railway.app/v1/duels/event/${eventId}/clan/stats`)
   const clanStats = clanStatsresponse?.data
-  const vsStats = await DuelModel.aggregate(  [
-    {
-      $match: { playerClan: 'DAK' }
-    },
-    {
-      $group: { 
-        _id: '$opponentClan', 
-        matchCount: { $sum: 1 },
-        matchWins: { $sum: { $cond: [ { $eq: [ "$playerWon", true ] }, 1, 0] }},
-        matchLosses: { $sum: { $cond: [ { $eq: [ "$playerWon", false ] }, 1, 0] }}
-      }
-      
-    }
-  ])
+  
+  const vsStatsresponse = await axios.get(`https://dak-backend-production.up.railway.app/v1/duels/event/${eventId}/clan/DAK/stats/against-opposing-clans`)
+  const vsStats = vsStatsresponse?.data
 
   return {
     props: {
