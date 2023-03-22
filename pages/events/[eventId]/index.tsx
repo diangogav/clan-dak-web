@@ -1,14 +1,10 @@
-import { eventsAPI } from '@/apis';
 import { GetServerSideProps, GetStaticProps } from 'next';
 import { FC } from 'react';
 import { PlayerTable } from '@/components/player/PlayerTable';
 import { Layout } from '@/components/layouts/Layout';
 import { DuelStatistic } from '@/interfaces';
-import { DuelModel, DuelStatisticsModel } from '@/models';
-import { db } from '@/database';
 import { ClanTable } from '@/components/clan/ClanTable';
 import { PieChart } from '@/components/ui/PieChart';
-import { Grid } from '@nextui-org/react';
 import axios from 'axios';
 
 interface Props {
@@ -22,10 +18,7 @@ const EventPage: FC<Props> = ({ statistics, clanStats, vsStats }) => {
   return (
     <Layout>
       <PlayerTable
-        statistics={statistics.map((statistic) => ({
-          ...statistic,
-          id: statistic._id,
-        }))}
+        statistics={statistics}
       />
       <PieChart
         data={vsStats.map(({ _id, matchWins }) => ({
@@ -48,10 +41,10 @@ const EventPage: FC<Props> = ({ statistics, clanStats, vsStats }) => {
 
 export const getServerSideProps: GetServerSideProps = async({ params }) => {
   const { eventId } = params as { eventId: string }
-  db.connect()
-  const response = await DuelStatisticsModel.find({ eventId })
-  const statistics = response.map(item => ({ ...item.toObject(), _id: item._id.toString() }))
-
+  const statisticsResponse = await axios.get(
+    `https://dak-backend-production.up.railway.app/v1/duels/players/stats/event/${eventId}`
+  );
+  const statistics = statisticsResponse?.data
   const clanStatsresponse = await axios.get(`https://dak-backend-production.up.railway.app/v1/duels/event/${eventId}/clan/stats`)
   const clanStats = clanStatsresponse?.data
   
