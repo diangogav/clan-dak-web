@@ -40,7 +40,7 @@ export const PlayerTable: FC<Props> = ({ statistics }) => {
                 <Tooltip content="Details">
                   <IconButton
                     onClick={() => {
-                      router.push("/events/[eventId]/player/[playerId]", `/events/${user.eventId}/player/${user.playerId}`)  
+                      router.push("/events/[eventId]/player/[playerId]", `/events/${user.eventId}/player/${user.id}`)  
                     }}
                   >
                     <EyeIcon size={20} fill="#979797" />
