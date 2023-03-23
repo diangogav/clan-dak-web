@@ -6,7 +6,7 @@ import { DuelStatistic } from '@/interfaces';
 import { ClanTable } from '@/components/clan/ClanTable';
 import { PieChart } from '@/components/ui/PieChart';
 import axios from 'axios';
-import { Card, Grid, Typography } from '@mui/material';
+import { Card, Divider, Grid, Typography } from '@mui/material';
 
 interface Props {
   statistics: DuelStatistic[];
@@ -18,10 +18,9 @@ const EventPage: FC<Props> = ({ statistics, clanStats, vsStats }) => {
   
   return (
     <Layout>
-      <Grid container>
+      <Grid sx={{ mt: 2 }} spacing={5} container>
         <Grid
           item={true}
-          padding={5}
           xs={12}
           md={6}
           style={{ display: "flex", justifyContent: "center" }}
@@ -30,7 +29,6 @@ const EventPage: FC<Props> = ({ statistics, clanStats, vsStats }) => {
         </Grid>
         <Grid
           item={true}
-          padding={5}
           xs={12}
           md={6}
           style={{ display: "flex", justifyContent: "center" }}
@@ -39,8 +37,8 @@ const EventPage: FC<Props> = ({ statistics, clanStats, vsStats }) => {
         </Grid>
       </Grid>
 
-      <Grid container>
-        <Grid md={6} padding={5} item={true}>
+      <Grid sx={{ mt: 2 }} spacing={5} container>
+        <Grid xs={12} md={6} item={true}>
           <Card>
             <PieChart
               data={vsStats.map(({ _id, matchWins }) => ({
@@ -51,7 +49,7 @@ const EventPage: FC<Props> = ({ statistics, clanStats, vsStats }) => {
             />
           </Card>
         </Grid>
-        <Grid md={6} padding={5} item={true}>
+        <Grid xs={12} md={6} item={true}>
           <Card>
             <PieChart
               data={vsStats.map(({ _id, matchLosses }) => ({
