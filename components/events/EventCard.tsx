@@ -1,4 +1,4 @@
-import { Card, Grid, Row, Text } from "@nextui-org/react";
+import { Card, CardActionArea, CardContent, CardMedia, Grid, Typography } from "@mui/material";
 import { useRouter } from "next/router";
 import { FC } from "react";
 import { Event } from '../../interfaces'
@@ -16,16 +16,18 @@ export const EventCard: FC<Props> = ({ event }) => {
 
   return (
     <Grid key={event.uuid}>
-      <Card isHoverable onClickCapture={handleClick}>
-        <Card.Body css={{ p: 1 }}>
-          <Card.Image src={event.cover} width="100%" height={140} />
-        </Card.Body>
-        <Card.Footer>
-          <Row justify="space-between">
-            <Text transform="capitalize">{event.name}</Text>
-            <Text>{`Temporada ${event.season}`}</Text>
-          </Row>
-        </Card.Footer>
+      <Card sx={{ maxWidth: 345 }} onClick={handleClick}>
+        <CardActionArea>
+          <CardMedia component="img" image={event.cover} />
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="div">
+              {event.name}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              {`Temporada ${event.season}`}
+            </Typography>
+          </CardContent>
+        </CardActionArea>
       </Card>
     </Grid>
   );

@@ -36,5 +36,5 @@ export const PieChart: FC<Props> = ({ data, title }) => {
     ]
   };
 
-  return (<ReactEcharts option={option} />)
+  return (<ReactEcharts opts={{}} option={option} />)
 }

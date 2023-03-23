@@ -1,6 +1,6 @@
 import { EventCard } from "@/components/events/EventCard";
 import { Layout } from "@/components/layouts/Layout"
-import { Grid } from "@nextui-org/react"
+import { Grid } from "@mui/material";
 
 const EventsPage = () => {
   const events = [{
@@ -12,11 +12,11 @@ const EventsPage = () => {
 
   return (
     <Layout title="Eventos">
-      <Grid.Container gap={2} justify="flex-start">
+      <Grid container>
         {events.map((event) => (
           <EventCard  key={event.uuid} event={event}/>
         ))}
-      </Grid.Container>
+      </Grid>
     </Layout>
   );
 }

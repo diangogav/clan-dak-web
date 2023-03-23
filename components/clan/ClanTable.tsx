@@ -1,55 +1,42 @@
-import { Col, Row, Table, Tooltip, User } from '@nextui-org/react';
 import { FC } from "react";
-import { DuelStatistic } from '../../interfaces';
-import { useRouter } from 'next/router';
+import { Paper, TableContainer, TableHead, Table, TableRow, TableCell, TableBody } from '@mui/material';
 
 interface Props {
-  clanStats: { clan: string; matchCount: number; average: string }[];
+  clanStats: { clan: string; matchCount: number; average: string, missingDuels: number,  maxPointsAvailable: number, points: number }[];
 }
 
 export const ClanTable: FC<Props> = ({ clanStats }) => {
-
-  const columns = [
-    { name: "Clan", uid: "clan" },
-    { name: "Cantidad de match jugados", uid: "matchCount" },
-    { name: "Puntos", uid: "points" },
-    { name: "Promedio", uid: "average" },
-    { name: "Duelos Faltantes", uid: "missingDuels" },
-    { name: "Puntos posibles", uid: "maxPointsAvailable" },
-  ];
-
-  const renderCell = (user: { clan: string; matchCount: number; average: string }, columnKey: React.Key) => {
-    const cellValue = user[columnKey as keyof { clan: string; matchCount: number; average: string }];
-    return cellValue;
-    }
     return (
-      <Table
-      css={{
-        height: "auto",
-        minWidth: "100%",
-        width: "100%"
-      }}
-      selectionMode="none"
-    >
-      <Table.Header columns={columns}>
-        {(column) => (
-          <Table.Column 
-            key={column.uid}
-            allowsSorting
-          >
-            {column.name}
-          </Table.Column>
-        )}
-      </Table.Header>
-      <Table.Body items={clanStats}>
-        {(item: { clan: string; matchCount: number; average: string }) => (
-          <Table.Row>
-            {(columnKey) => (
-              <Table.Cell>{renderCell(item, columnKey)}</Table.Cell>
-            )}
-          </Table.Row>
-        )}
-      </Table.Body>
-    </Table>
+      <TableContainer component={Paper}>
+      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell>Clan</TableCell>
+            <TableCell align="right">Matchs jugados</TableCell>
+            <TableCell align="right">Puntos</TableCell>
+            <TableCell align="right">Promedio</TableCell>
+            <TableCell align="right">Duelos faltantes</TableCell>
+            <TableCell align="right">Puntos posibles</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {clanStats.map((row) => (
+            <TableRow
+              key={row.clan}
+              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+            >
+              <TableCell component="th" scope="row">
+                {row.clan}
+              </TableCell>
+              <TableCell align="right">{row.matchCount}</TableCell>
+              <TableCell align="right">{row.points}</TableCell>
+              <TableCell align="right">{row.average}</TableCell>
+              <TableCell align="right">{row.missingDuels}</TableCell>
+              <TableCell align="right">{row.maxPointsAvailable}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
   );
 };
