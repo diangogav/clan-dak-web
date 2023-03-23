@@ -9,8 +9,6 @@ interface Props {
 
 export const ClanTable: FC<Props> = ({ clanStats }) => {
 
-  const router = useRouter()
-
   const columns = [
     { name: "Clan", uid: "clan" },
     { name: "Cantidad de match jugados", uid: "matchCount" },
@@ -26,10 +24,10 @@ export const ClanTable: FC<Props> = ({ clanStats }) => {
     }
     return (
       <Table
-      aria-label="Example table with custom cells"
       css={{
         height: "auto",
         minWidth: "100%",
+        width: "100%"
       }}
       selectionMode="none"
     >

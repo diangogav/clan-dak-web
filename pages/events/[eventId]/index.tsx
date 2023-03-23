@@ -6,6 +6,7 @@ import { DuelStatistic } from '@/interfaces';
 import { ClanTable } from '@/components/clan/ClanTable';
 import { PieChart } from '@/components/ui/PieChart';
 import axios from 'axios';
+import { Grid, styled } from '@nextui-org/react';
 
 interface Props {
   statistics: DuelStatistic[];
@@ -17,9 +18,14 @@ const EventPage: FC<Props> = ({ statistics, clanStats, vsStats }) => {
   
   return (
     <Layout>
-      <PlayerTable
-        statistics={statistics}
-      />
+      <Grid.Container>
+        <Grid xs={12} md={6}>
+          <PlayerTable statistics={statistics} />
+        </Grid>
+        <Grid xs={12} md={6}>
+          <ClanTable clanStats={clanStats} />
+        </Grid>
+      </Grid.Container>
       <PieChart
         data={vsStats.map(({ _id, matchWins }) => ({
           name: _id,
@@ -34,7 +40,6 @@ const EventPage: FC<Props> = ({ statistics, clanStats, vsStats }) => {
         }))}
         title="Match Perdidos"
       />
-      <ClanTable clanStats={clanStats} />
     </Layout>
   );
 };

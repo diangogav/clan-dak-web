@@ -22,14 +22,14 @@ export const NavBar = () => {
         width={70}
         height={70}
       />
-      <Text color="white" h3>
+      <Text color="black" h3>
         {" "}
         Clan DAK{" "}
       </Text>
 
       <Spacer css={{ flex: 1 }} />
 
-      <Text color="white" h3>
+      <Text color="black" h3>
         Duelistas DAK
       </Text>
     </div>

@@ -29,7 +29,7 @@ export const PlayerTable: FC<Props> = ({ statistics }) => {
       case "name":
         return (
           <User squared src="https://i.pinimg.com/originals/0e/72/b3/0e72b35e99486084d2170a8d7cc38394.png" name={cellValue} css={{ p: 0 }}>
-            {user?.playerName}
+            {user?.nickname}
           </User>
         );
 
