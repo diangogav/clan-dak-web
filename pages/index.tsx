@@ -31,7 +31,7 @@ const HomePage: NextPage = () => {
 
         <Divider />
 
-        <Grid item xs={4} sx={{ display: "flex", justifyContent: "center" }}>
+        <Grid item xs={12} md={4} sx={{ display: "flex", justifyContent: "center" }}>
           <Card sx={{ width: 275 }}>
             <CardContent>
               <Typography display="flex" justifyContent="center">
@@ -44,7 +44,7 @@ const HomePage: NextPage = () => {
           </Card>
         </Grid>
 
-        <Grid item xs={4} sx={{ display: "flex", justifyContent: "center" }}>
+        <Grid item xs={12} md={4} sx={{ display: "flex", justifyContent: "center" }}>
           <Card sx={{ width: 275 }}>
             <CardContent>
               <Typography display="flex" justifyContent="center">
@@ -59,7 +59,7 @@ const HomePage: NextPage = () => {
           </Card>
         </Grid>
 
-        <Grid item xs={4} sx={{ display: "flex", justifyContent: "center" }}>
+        <Grid item xs={12} md={4} sx={{ display: "flex", justifyContent: "center" }}>
           <Card sx={{ width: 275 }}>
             <CardContent>
               <Typography display="flex" justifyContent="center">
@@ -75,7 +75,7 @@ const HomePage: NextPage = () => {
         </Grid>
 
         <Grid display='flex' justifyContent='center' sx={{mt: 10}}>
-          <Typography variant="h4" width="80%" textAlign='center'>
+          <Typography variant="h4" width="80%" textAlign='center' >
             Únete al discord del <Link href="https://discord.gg/3kY333VN">Mundo de clanes</Link> para muchos duelos y torneos al estilo del legendario juego Joey the passion
           </Typography>
         </Grid>
