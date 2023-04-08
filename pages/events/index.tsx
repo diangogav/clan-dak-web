@@ -12,9 +12,11 @@ const EventsPage = () => {
 
   return (
     <Layout title="Eventos">
-      <Grid container>
+      <Grid container display='flex' sx={{ mt: 5 }}>
         {events.map((event) => (
-          <EventCard  key={event.uuid} event={event}/>
+          <Grid item key={event.uuid}>
+            <EventCard   event={event}/>
+          </Grid>
         ))}
       </Grid>
     </Layout>
