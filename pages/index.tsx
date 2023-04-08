@@ -85,7 +85,7 @@ const HomePage: NextPage = () => {
           xs={12}
           sx={{ mb: 10, display: "flex", justifyContent: "center" }}
         >
-          <Image src="/mdc-logo.png" alt="Logo" width={500} height={500} />
+          <Image src="/mdc-logo.png" alt="Logo" width={400} height={400} />
         </Grid>
       </Grid>
     </Layout>
